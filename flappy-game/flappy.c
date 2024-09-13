@@ -31,6 +31,7 @@ int best;
 int idle_time = 30;
 float frame = 0;
 
+SDL_Color bg_color = {0, 0, 0}; 
 SDL_Event event;
 SDL_Renderer *renderer;
 SDL_Surface *surf;
@@ -60,7 +61,12 @@ int main()
                         case SDL_KEYDOWN:
 				if (event.key.keysym.sym == SDLK_ESCAPE){
 					exit(0);
-				}
+				}else if (event.key.keysym.sym == SDLK_b) {
+                                // Change background color by cycling through different colors
+                                bg_color.r = rand() % 256;
+                                bg_color.g = rand() % 256;
+                                bg_color.b = rand() % 256;
+    }
                         case SDL_MOUSEBUTTONDOWN:
                                 if(gamestate == ALIVE)
                                 {
@@ -174,8 +180,9 @@ void update_pipe(int i)
 //draw everything in the game on the screen
 void draw_stuff()
 {
-        SDL_Rect dest = {0, 0, W, H};
-        SDL_RenderCopy(renderer, background, NULL, &dest);
+        SDL_SetRenderDrawColor(renderer, bg_color.r, bg_color.g, bg_color.b, 255);
+        SDL_RenderClear(renderer);
+
 
         //draw pipes
         for(int i = 0; i < 2; i++)
