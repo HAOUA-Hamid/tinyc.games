@@ -58,7 +58,7 @@ int main()
                         case SDL_QUIT:
                                 exit(0);
                         case SDL_KEYDOWN:
-				if (event,key.keysym.sym==SDLK_ESCAPE){
+				if (event.key.keysym.sym == SDLK_ESCAPE){
 					exit(0);
 				}
                         case SDL_MOUSEBUTTONDOWN:
